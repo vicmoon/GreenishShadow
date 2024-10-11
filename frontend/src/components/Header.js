@@ -7,9 +7,11 @@ function Header() {
       <section className="socials">
         <img className="socials-logo" src="./logo.jpg" alt="logo" />
         <span className="socials-text">
-          <p className="socials-large-text">Shadow Greenish</p>
+          <p className="socials-large-text">
+            Shadow <br /> Greenish
+          </p>
           <h5>Find me on Social Media</h5>
-          <ul>
+          <ul className="social-links">
             <a
               href="https://www.facebook.com"
               target="_blank"

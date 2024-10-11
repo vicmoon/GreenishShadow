@@ -1,7 +1,9 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #201e43;
+  background-color: #282c34;
+  letter-spacing: 2px;
   color: #fff;
+  margin-top: 0;
+  padding: 0 20px;
 }
 
 .header {
@@ -11,8 +13,6 @@ body {
   flex-direction: row;
   justify-content: space-between; /* This places the sections at opposite ends */
   align-items: center; /* Vertically aligns the content */
-  padding: 20px;
-
   color: white;
 }
 
@@ -22,18 +22,34 @@ body {
 }
 
 .socials-logo {
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
+  border-radius: 10px;
+  border: 3px solid #fff;
 }
 
+.socials h5 {
+  margin-top: -20px;
+  font-size: 10px;
+}
 .socials-text {
   margin-left: 10px;
 }
 
+.social-links {
+  margin-left: -40px;
+  color: #fff;
+}
+.social-links i {
+  color: #fff;
+}
+
 .socials-large-text {
-  font-size: 20px;
+  font-size: 30px;
+  letter-spacing: 3px;
   color: #86b2c1;
   text-transform: uppercase;
+  font-weight: bold;
 }
 
 .subscription {
@@ -46,4 +62,24 @@ body {
 .subscription h5 {
   font-size: 18px;
   color: #fff;
+}
+
+.subscription input[type="email"] {
+  padding: 8px;
+  max-width: 100px;
+  border: 2px solid #86b2c1;
+  background-color: #333; /* Dark background to match */
+  color: #fff;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.subscription label {
+  color: #86b2c1;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.subscription input[type="checkbox"] {
+  margin-right: 10px;
 }
