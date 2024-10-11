@@ -1,18 +1,30 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Import Link to handle navigation
 import "./Timeline.css";
 
 function Timeline() {
+  const articles = [
+    { id: 1, title: "Article I", date: "01/01/24", image: "/game.jpg" },
+    { id: 2, title: "Article II", date: "01/01/24", image: "/game.jpg" },
+  ];
+
   return (
     <div className="timeline">
-      <div className="timeline-item left">
-        <div className="timeline-content">
-          <h3>Article I</h3>
-
-          <img src="path/to/image1.jpg" alt="article image" />
-          <p>01/01/24</p>
+      {articles.map((article, index) => (
+        <div
+          className={`timeline-item ${index % 2 === 0 ? "left" : "right"}`}
+          key={article.id}
+        >
+          <div className="timeline-content">
+            <h3>{article.title}</h3>
+            <img src={article.image} alt={article.title} />
+            <p>{article.date}</p>
+            <Link to={`/article/${article.id}`}>Read More</Link>{" "}
+            {/* Dynamic link */}
+          </div>
         </div>
-      </div>
-    </div> // Correctly closing all divs
+      ))}
+    </div>
   );
 }
 

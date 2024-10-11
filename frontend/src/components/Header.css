@@ -1,5 +1,6 @@
 body {
   background-color: #282c34;
+  font-family: "Bebas Neue", sans-serif;
   letter-spacing: 2px;
   color: #fff;
   margin-top: 0;
@@ -7,7 +8,6 @@ body {
 }
 
 .header {
-  margin-top: 0;
   min-height: 10vh;
   display: flex;
   flex-direction: row;
@@ -17,6 +17,7 @@ body {
 }
 
 .socials {
+  margin-top: 0;
   display: flex;
   align-items: center;
 }
@@ -37,16 +38,20 @@ body {
 }
 
 .social-links {
+  display: flex;
+  gap: 1px;
   margin-left: -40px;
-  color: #fff;
 }
+
 .social-links i {
   color: #fff;
+  font-size: 15px;
+  margin-right: 5px;
 }
 
 .socials-large-text {
   font-size: 30px;
-  letter-spacing: 3px;
+  letter-spacing: 5px;
   color: #86b2c1;
   text-transform: uppercase;
   font-weight: bold;
@@ -60,14 +65,15 @@ body {
 }
 
 .subscription h5 {
+  font-weight: bold;
   font-size: 18px;
   color: #fff;
 }
 
 .subscription input[type="email"] {
   padding: 8px;
-  max-width: 100px;
-  border: 2px solid #86b2c1;
+  max-width: 120px;
+  margin-top: -10px;
   background-color: #333; /* Dark background to match */
   color: #fff;
   border-radius: 4px;

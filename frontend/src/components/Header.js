@@ -20,7 +20,6 @@ function Header() {
             >
               <i className="fab fa-facebook"></i>
             </a>
-
             <a
               href="https://www.instagram.com"
               target="_blank"
@@ -34,21 +33,8 @@ function Header() {
             <a href="https://www.twitter.com" target="_blank" rel="noreferrer">
               <i className="fab fa-x-twitter"></i>
             </a>
-            <a href="https://www.threads.net" target="_blank" rel="noreferrer">
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.whatsapp.com" target="_blank" rel="noreferrer">
-              <i className="fab fa-whatsapp"></i>
-            </a>
             <a href="https://www.telegram.org" target="_blank" rel="noreferrer">
               <i className="fab fa-telegram"></i>
-            </a>
-            <a
-              href="https://www.pinterest.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <i className="fab fa-pinterest"></i>
             </a>
           </ul>
         </span>
