@@ -5,7 +5,7 @@ function Header() {
   return (
     <div className="header">
       <section className="socials">
-        <img className="socials-logo" src="/logo.jpg" alt="logo" />
+        <img className="socials-logo" src="./logo.jpg" alt="logo" />
         <span className="socials-text">
           <p className="socials-large-text">Shadow Greenish</p>
           <h5>Find me on Social Media</h5>
