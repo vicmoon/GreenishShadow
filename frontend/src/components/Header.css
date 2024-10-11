@@ -1,0 +1,44 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #201e43;
+  color: #fff;
+}
+
+.header {
+  background-color: #333;
+  padding: 20px;
+  text-align: center;
+}
+.socials .socials-logo {
+  width: 30%;
+  height: 30%;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+}
+
+.socials-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.socials-text {
+  margin-left: 10px;
+}
+
+.socials-large-text {
+  font-size: 20px;
+  color: #86b2c1;
+}
+
+.subscription {
+  margin-top: 20px;
+}
+
+.subscription h5 {
+  font-size: 18px;
+  color: #fff;
+}

@@ -1,0 +1,93 @@
+/* Basic styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #201e43;
+  color: #fff;
+}
+
+.timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.timeline-item {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  margin: 20px 0;
+}
+
+.timeline-item.right {
+  justify-content: flex-end;
+}
+
+.timeline-content {
+  background-color: #333;
+  padding: 20px;
+  border-radius: 6px;
+  position: relative;
+  width: 300px;
+}
+
+/* Add a vertical line down the center */
+.timeline::before {
+  content: "";
+  position: absolute;
+  width: 4px;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -2px;
+}
+
+/* Styling for the timeline circles */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: white;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.timeline-item.left::before {
+  left: calc(50% - 8px);
+}
+
+.timeline-item.right::before {
+  right: calc(50% - 8px);
+}
+
+h3 {
+  color: #86b2c1;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Image styling */
+.timeline-content img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* Date styling */
+.timeline-content p {
+  background-color: #333;
+  color: #fff;
+  font-size: 14px;
+  padding: 5px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 110%;
+}
+
+.timeline-item.right .timeline-content p {
+  left: auto;
+  right: 110%;
+}
