@@ -5,7 +5,7 @@ body {
 
 .timeline {
   position: relative;
-  max-width: 1200px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
@@ -25,7 +25,7 @@ body {
   padding: 20px;
   border-radius: 6px;
   position: relative;
-  width: 300px;
+  width: 200px;
 }
 
 /* Add a vertical line down the center */
@@ -68,7 +68,7 @@ h3 {
 
 /* Image styling */
 .timeline-content img {
-  width: 100%;
+  width: 80%;
   height: auto;
   border-radius: 6px;
 }
@@ -88,4 +88,8 @@ h3 {
 .timeline-item.right .timeline-content p {
   left: auto;
   right: 110%;
+}
+
+.timeline-article-link {
+  color: aliceblue;
 }
