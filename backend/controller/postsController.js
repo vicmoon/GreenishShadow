@@ -20,14 +20,14 @@ const getOnePostController = async (req, res, next) => {
 
 //POST a Post
 const postPostController = async (req, res, next) => {
-  const { title, content, tag } = req.body;
+  const { title, content, tag, image } = req.body;
 
   try {
     const createdPost = await Post.create({
       title,
       content,
       tag,
-      // image: req.file.path,
+      image,
     });
     console.log("Post created", createdPost);
     res.status(201).json({ message: "Post created", post: createdPost });

@@ -5,40 +5,46 @@ import "./Timeline.css";
 function Timeline() {
   const [articles, setArticles] = useState([]);
 
-  // Fetch articles from the backend when the component mounts
   useEffect(() => {
-    // Fetch the articles from the backend
-    fetch("http://localhost:3000/api/posts") // Adjust URL as needed
+    fetch("http://localhost:3000/api/posts")
       .then((response) => response.json())
-      .then((data) => setArticles(data)) // Set fetched data to the articles state
+      .then((data) => {
+        console.log("Data fetched: ", data); // Debug the response here
+        // Adjust this based on the actual structure of the data you're receiving
+        if (data.posts) {
+          setArticles(data.posts); // if the response contains { posts: [...] }
+        } else {
+          setArticles(data); // if the response is just an array
+        }
+      })
       .catch((error) => console.error("Error fetching articles:", error));
   }, []);
 
   return (
     <div className="timeline">
-      {articles.map((article) => (
-        <div
-          className={`timeline-item ${
-            article.tag === "game update" ? "right" : "left"
-          }`}
-          key={article._id} // MongoDB document ID is `_id`
-        >
-          <div className="timeline-content">
-            <h3>{article.title}</h3>
-            <Link
-              to={`/article/${article._id}`} // Use _id to navigate to the article detail page
-              className="timeline-article-link"
-            >
-              <img
-                src={article.image || "/default-image.jpg"}
-                alt={article.title}
-              />
-            </Link>
-            <p>{article.createdAt}</p>{" "}
-            {/* Assuming you have a createdAt field */}
+      {articles.length > 0 ? (
+        articles.map((article) => (
+          <div
+            className={`timeline-item ${
+              article.tag === "Game" ? "right" : "left"
+            }`}
+            key={article._id}
+          >
+            <div className="timeline-content">
+              <h3>{article.title}</h3>
+              <Link
+                to={`/article/${article._id}`}
+                className="timeline-article-link"
+              >
+                <img src={article.image || "/game.jpg"} alt={article.title} />
+              </Link>
+              <p>{article.createdAt}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <p>No articles available</p>
+      )}
     </div>
   );
 }

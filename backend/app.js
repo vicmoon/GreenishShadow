@@ -1,14 +1,18 @@
-const path = require("path");
 const express = require("express");
+const cors = require("cors");
+const path = require("path");
 const session = require("express-session");
 const mongoStore = require("connect-mongo");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const postsRoutes = require("./routes/posts");
+const postsRoutes = require("./routes/posts"); // Import your routes
 require("dotenv").config();
 require("./config/mongoose");
 
 const app = express();
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, "../frontend/build")));
@@ -16,9 +20,11 @@ app.use(express.static(path.join(__dirname, "../frontend/build")));
 // Register API middleware and routes
 app.use(express.json());
 app.use(bodyParser.json());
-app.use("/api", postsRoutes); // API routes
 
-// Anything that doesn't match the API routes should render the React app
+// Make sure your API routes are registered **before** the wildcard route
+app.use("/api", postsRoutes); // API routes are prefixed with /api
+
+// Wildcard route to serve the React app
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
 });
@@ -36,7 +42,7 @@ app.use(
   })
 );
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

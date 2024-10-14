@@ -1,6 +1,6 @@
 const express = require("express");
 const multer = require("multer");
-const storage = require("../config/cloudinary");
+const storage = require("../config/firebase");
 const postsRoutes = express.Router();
 const {
   allPostsController,
@@ -15,7 +15,7 @@ const upload = multer({
 });
 
 // GET all posts
-postsRoutes.get("/api/posts", allPostsController);
+postsRoutes.get("/posts", allPostsController);
 
 // GET a post
 postsRoutes.get("/:id", getOnePostController);
