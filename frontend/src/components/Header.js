@@ -5,7 +5,7 @@ function Header() {
   return (
     <div className="header">
       <section className="socials">
-        <img className="socials-logo" src="./logo.jpg" alt="logo" />
+        <img className="socials-logo" src="/logo.jpg" alt="logo" />
         <span className="socials-text">
           <p className="socials-large-text">
             Shadow <br /> Greenish
@@ -44,10 +44,12 @@ function Header() {
         <h5>Subscription</h5>
         <input type="email" placeholder="name@email.com" />
         <label>
-          <input type="checkbox" /> Weekly Letter
+          <input type="checkbox" />
+          Weekly Letter
         </label>
         <label>
-          <input type="checkbox" /> Game Updates
+          <input type="checkbox" />
+          Game Updates
         </label>
       </section>
     </div>

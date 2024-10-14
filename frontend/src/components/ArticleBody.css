@@ -1,44 +1,105 @@
-.article {
-  background-color: #1d1d1d; /* Dark background */
-  padding: 20px;
-  color: #ffffff; /* Text color white */
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  line-height: 1.6;
-}
-
-.article-tag {
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  color: #86b2c1; /* Color for the tag */
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.tag-label {
-  font-weight: normal;
-  color: #ffffff;
-}
-
-.tag-value {
-  color: #86b2c1;
-}
-
-.article-content h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
+/* Basic styling */
+body {
   color: #fff;
 }
 
-.article-content h3 {
-  font-size: 20px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  color: #86b2c1;
+.timeline {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.article-content p {
-  margin-bottom: 20px;
-  text-align: justify;
-  color: #dcdcdc;
+/* Styling for each timeline item */
+.timeline-item {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  margin: 20px 0;
+}
+
+.timeline-item.right {
+  justify-content: flex-end;
+}
+
+.timeline-content {
+  padding: 0;
+  border-radius: 6px;
+  position: relative;
+  width: 300px; /* Same width for both h3 and image */
+  margin-left: 20px; /* Add space between the content and the center line */
+}
+
+/* Add a vertical line down the center */
+.timeline::before {
+  content: "";
+  position: absolute;
+  width: 4px;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -2px;
+}
+
+/* Remove timeline circles */
+.timeline-item::before {
+  content: none; /* Remove the circles */
+}
+
+.timeline-item.left .timeline-content {
+  margin-left: -40px; /* Space for items on the left */
+}
+
+.timeline-item.right .timeline-content {
+  margin-right: -40px; /* Space for items on the right */
+}
+
+/* h3 styling - background color changes based on type */
+.timeline-content h3 {
+  color: black;
+  font-size: 18px;
+  margin-bottom: 0;
+  background-color: green;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+/* If it's a game update (right side), change the background color */
+.timeline-item.right .timeline-content h3 {
+  background-color: #86b2c1;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+/* Image styling */
+.timeline-content img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+/* Date styling */
+.timeline-content p {
+  background-color: #333;
+  color: #fff;
+  font-size: 14px;
+  padding: 5px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 110%;
+}
+
+.timeline-item.right .timeline-content p {
+  left: auto;
+  right: 110%;
+}
+
+.timeline-article-link {
+  color: aliceblue;
 }

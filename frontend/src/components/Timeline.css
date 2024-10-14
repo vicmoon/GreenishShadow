@@ -21,7 +21,6 @@ body {
 }
 
 .timeline-content {
-  background-color: #333;
   padding: 20px;
   border-radius: 6px;
   position: relative;
@@ -61,16 +60,17 @@ body {
 }
 
 h3 {
-  color: #86b2c1;
+  color: black;
   font-size: 18px;
-  margin-bottom: 10px;
+  margin-bottom: 0;
+  background-color: #86b2c1;
+  width: 200px;
 }
 
 /* Image styling */
 .timeline-content img {
-  width: 80%;
+  width: 90%;
   height: auto;
-  border-radius: 6px;
 }
 
 /* Date styling */

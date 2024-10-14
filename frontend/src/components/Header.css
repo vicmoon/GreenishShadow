@@ -66,8 +66,9 @@ body {
 
 .subscription h5 {
   font-weight: bold;
-  font-size: 18px;
-  color: #fff;
+  margin-bottom: 15px;
+  font-size: 27px;
+  color: #86b2c1;
 }
 
 .subscription input[type="email"] {
@@ -84,8 +85,14 @@ body {
   color: #86b2c1;
   font-size: 16px;
   margin-bottom: 5px;
+  display: flex;
+  align-items: center; /* Ensures the checkbox and text are vertically aligned */
 }
 
 .subscription input[type="checkbox"] {
   margin-right: 10px;
+}
+
+.subscription label {
+  margin-left: -16px;
 }
