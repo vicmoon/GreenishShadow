@@ -1,105 +1,43 @@
-/* Basic styling */
-body {
-  color: #fff;
-}
-
-.timeline {
-  position: relative;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* Styling for each timeline item */
-.timeline-item {
-  display: flex;
-  justify-content: flex-start;
-  position: relative;
-  margin: 20px 0;
-}
-
-.timeline-item.right {
-  justify-content: flex-end;
-}
-
-.timeline-content {
-  padding: 0;
-  border-radius: 6px;
-  position: relative;
-  width: 300px; /* Same width for both h3 and image */
-  margin-left: 20px; /* Add space between the content and the center line */
-}
-
-/* Add a vertical line down the center */
-.timeline::before {
-  content: "";
-  position: absolute;
-  width: 4px;
-  background-color: white;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  margin-left: -2px;
-}
-
-/* Remove timeline circles */
-.timeline-item::before {
-  content: none; /* Remove the circles */
-}
-
-.timeline-item.left .timeline-content {
-  margin-left: -40px; /* Space for items on the left */
-}
-
-.timeline-item.right .timeline-content {
-  margin-right: -40px; /* Space for items on the right */
-}
-
-/* h3 styling - background color changes based on type */
-.timeline-content h3 {
+.article-content,
+.article-tag {
+  max-height: 100vh; /* Adjust this height based on your layout */
+  max-width: 900px;
+  overflow: hidden; /* Hide overflow */
+  position: relative; /* Ensure position relative to child elements */
+  background-color: aliceblue;
   color: black;
-  font-size: 18px;
-  margin-bottom: 0;
-  background-color: green;
-  padding: 10px;
-  width: 100%;
-  box-sizing: border-box;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
+  padding: 20px;
 }
 
-/* If it's a game update (right side), change the background color */
-.timeline-item.right .timeline-content h3 {
-  background-color: #86b2c1;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
+.article-content:hover {
+  overflow: auto; /* Show scrolling when hovering */
 }
 
-/* Image styling */
-.timeline-content img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
+/* Styles for the tag container */
+.article-tag {
+  margin-top: 25px;
 }
 
-/* Date styling */
-.timeline-content p {
-  background-color: #333;
-  color: #fff;
-  font-size: 14px;
-  padding: 5px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 110%;
+/* Base styles for the tag label */
+.tag-label {
+  font-weight: bold;
+  margin-right: 5px;
+  color: #333;
 }
 
-.timeline-item.right .timeline-content p {
-  left: auto;
-  right: 110%;
+/* Tag value - dynamic background colors will be added via class */
+.tag-value {
+  padding: 5px 8px;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
 }
 
-.timeline-article-link {
-  color: aliceblue;
+/* Specific background colors for tag values */
+.article-tag .article {
+  background-color: green; /* Green for articles */
+}
+
+.article-tag .game {
+  background-color: #86b2c1; /* #86b2c1 for updates */
 }
