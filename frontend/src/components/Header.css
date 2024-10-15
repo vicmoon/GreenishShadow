@@ -1,6 +1,6 @@
 body {
   background-color: #282c34;
-  font-family: "Bebas Neue", sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   letter-spacing: 2px;
   color: #fff;
   margin-top: 0;
@@ -14,6 +14,26 @@ body {
   justify-content: space-between; /* This places the sections at opposite ends */
   align-items: center; /* Vertically aligns the content */
   color: white;
+}
+/* Header.css */
+.auth-links ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.auth-links ul li {
+  display: inline;
+  margin-right: 15px;
+}
+
+.auth-links ul li a {
+  text-decoration: none;
+  color: #333; /* Change color to suit your theme */
+}
+
+.auth-links ul li a:hover {
+  color: #007bff; /* Hover effect */
 }
 
 .socials {
@@ -71,7 +91,7 @@ body {
   color: #86b2c1;
 }
 
-.subscription input[type="email"] {
+.subscription input[type='email'] {
   padding: 8px;
   max-width: 120px;
   margin-top: -10px;
@@ -89,7 +109,7 @@ body {
   align-items: center; /* Ensures the checkbox and text are vertically aligned */
 }
 
-.subscription input[type="checkbox"] {
+.subscription input[type='checkbox'] {
   margin-right: 10px;
 }
 

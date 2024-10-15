@@ -24,7 +24,7 @@ postsRoutes.get('/posts/:articleId', getOnePostController);
 postsRoutes.post('/posts', postPostController);
 
 // EDIT Post
-postsRoutes.put('/:id', upload.single('image'), editPostController);
+postsRoutes.put('/posts/:id', upload.single('image'), editPostController);
 
 // DELETE Post
 postsRoutes.delete('/:id', deletePostController);

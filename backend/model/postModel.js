@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema(
   {
@@ -13,10 +13,15 @@ const postSchema = new mongoose.Schema(
     tag: {
       type: String,
       required: true,
-      enum: ["Article", "Game"],
+      enum: ['Article', 'Game'],
     },
     image: {
       type: String,
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+
+      ref: 'User',
     },
   },
   {
@@ -25,7 +30,7 @@ const postSchema = new mongoose.Schema(
 );
 
 //compile schema to form model
-const Post = mongoose.model("Post", postSchema);
+const Post = mongoose.model('Post', postSchema);
 
 //export model
 module.exports = Post;
