@@ -79,4 +79,7 @@
 .confirmation-message {
   color: #333;
   background-color: #4caf50;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 30px;
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './CreatePost.css';
 import { storage } from '../firebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 function CreatePost() {
   const [title, setTitle] = useState('');
@@ -12,9 +12,9 @@ function CreatePost() {
   const [imageURL, setImageURL] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [confirmationMessage, setConfirmationMessage] = useState(''); // New state for confirmation
+  const [confirmationMessage, setConfirmationMessage] = useState(''); // State for confirmation message
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize navigate hook
 
   const handleFileChange = (e) => {
     setImageFile(e.target.files[0]);
@@ -69,22 +69,30 @@ function CreatePost() {
         setImageFile(null);
         setImageURL('');
         setIsSubmitting(false);
+
+        // Display confirmation message
         setConfirmationMessage('✅ Post created successfully!');
-        navigate('/');
+
+        // Set a delay before redirecting
+        setTimeout(() => {
+          navigate('/');
+        }, 3000);
       })
       .catch((error) => {
         console.error('Error creating post:', error);
         setIsSubmitting(false);
-        setConfirmationMessage('❌ Error creating post. Please try again.'); // Error message
+        setConfirmationMessage('❌ Error creating post. Please try again.');
       });
   };
 
   return (
     <div className="create-post">
       <h2>Create a New Post</h2>
+
       {confirmationMessage && (
         <div className="confirmation-message">{confirmationMessage}</div>
       )}
+
       <input
         type="text"
         placeholder="Title"
