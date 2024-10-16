@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import './CreatePost.css'; // Import the CSS file
-import { storage } from '../firebaseConfig'; // Firebase storage instance
+import './CreatePost.css';
+import { storage } from '../firebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { useNavigate } from 'react-router-dom';
 
 function CreatePost() {
   const [title, setTitle] = useState('');
@@ -9,10 +10,14 @@ function CreatePost() {
   const [tag, setTag] = useState('Article');
   const [imageFile, setImageFile] = useState(null);
   const [imageURL, setImageURL] = useState('');
-  const [isUploading, setIsUploading] = useState(false); // To track upload status
+  const [isUploading, setIsUploading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [confirmationMessage, setConfirmationMessage] = useState(''); // New state for confirmation
+
+  const navigate = useNavigate();
 
   const handleFileChange = (e) => {
-    setImageFile(e.target.files[0]); // Set the selected image file
+    setImageFile(e.target.files[0]);
   };
 
   const handleUpload = () => {
@@ -22,19 +27,27 @@ function CreatePost() {
       uploadBytes(storageRef, imageFile)
         .then((snapshot) => getDownloadURL(snapshot.ref))
         .then((url) => {
-          console.log('File available at:', url);
-          setImageURL(url); // Set the uploaded image URL
-          setIsUploading(false); // Upload finished
+          setImageURL(url);
+          setIsUploading(false);
         })
         .catch((error) => {
           console.error('Error uploading image:', error);
-          setIsUploading(false); // Reset if there's an error
+          setIsUploading(false);
+          alert('Error uploading image. Please try again.');
         });
+    } else {
+      alert('Please select an image file first');
     }
   };
 
   const handleSubmit = () => {
-    // Post data to backend, including image URL
+    if (!title || !content || !imageURL) {
+      alert('Please fill all fields and upload an image');
+      return;
+    }
+
+    setIsSubmitting(true);
+
     fetch('http://localhost:9000/api/posts', {
       method: 'POST',
       headers: {
@@ -44,25 +57,34 @@ function CreatePost() {
         title,
         content,
         tag,
-        image: imageURL, // Include uploaded image URL
+        image: imageURL,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log('Post created:', data);
-        // Clear the form fields after successful post creation
         setTitle('');
         setContent('');
         setTag('Article');
         setImageFile(null);
         setImageURL('');
+        setIsSubmitting(false);
+        setConfirmationMessage('✅ Post created successfully!');
+        navigate('/');
       })
-      .catch((error) => console.error('Error creating post:', error));
+      .catch((error) => {
+        console.error('Error creating post:', error);
+        setIsSubmitting(false);
+        setConfirmationMessage('❌ Error creating post. Please try again.'); // Error message
+      });
   };
 
   return (
     <div className="create-post">
       <h2>Create a New Post</h2>
+      {confirmationMessage && (
+        <div className="confirmation-message">{confirmationMessage}</div>
+      )}
       <input
         type="text"
         placeholder="Title"
@@ -92,8 +114,12 @@ function CreatePost() {
         </button>
       </div>
 
-      <button onClick={handleSubmit} className="submit-button">
-        Create Post
+      <button
+        onClick={handleSubmit}
+        className="submit-button"
+        disabled={isSubmitting || isUploading}
+      >
+        {isSubmitting ? 'Creating Post...' : 'Create Post'}
       </button>
     </div>
   );

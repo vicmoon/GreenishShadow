@@ -38,10 +38,15 @@ const postPostController = async (req, res, next) => {
       title,
       content,
       tag,
-      image,
+      image, // Now stores the Firebase image URL
     });
     console.log('Post created', createdPost);
-    res.status(201).json({ message: 'Post created', post: createdPost });
+
+    // Send a JSON response with the created post
+    res.status(201).json({
+      message: 'Post created successfully',
+      post: createdPost,
+    });
   } catch (error) {
     console.error('Error creating post:', error.message);
     res.status(400).json({ error: error.message });

@@ -1,9 +1,10 @@
 /* CreatePost.css */
 
 .create-post {
-  max-width: 600px;
+  max-width: 1200px;
+  height: 100vh;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -26,11 +27,11 @@
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 100%;
+  width: 95%;
 }
 
 .textarea-field {
-  height: 120px;
+  height: 300px;
   resize: none;
 }
 
@@ -64,9 +65,18 @@
 }
 
 .upload-button {
-  margin-left: 10px;
+  margin-right: 35px;
 }
 
 .submit-button {
   margin-top: 15px;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.confirmation-message {
+  color: #333;
+  background-color: #4caf50;
 }
