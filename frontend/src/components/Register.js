@@ -1,6 +1,7 @@
 // src/components/Register.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import './RegisterForm.css';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -27,7 +28,7 @@ const Register = () => {
       );
       if (response.status === 200) {
         console.log('User registered successfully');
-        window.location.href = '/posts'; // Redirect after successful registration
+        window.location.href = '/';
       }
     } catch (error) {
       console.error(
@@ -38,7 +39,7 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div className="register-container">
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <div>

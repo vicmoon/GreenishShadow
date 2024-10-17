@@ -1,6 +1,7 @@
 // src/components/Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import './LoginForm.css';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -26,7 +27,7 @@ const Login = () => {
       );
       if (response.status === 200) {
         console.log('Login successful');
-        window.location.href = '/posts'; // Redirect after successful login
+        window.location.href = '/';
       }
     } catch (error) {
       console.error(
@@ -37,7 +38,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>

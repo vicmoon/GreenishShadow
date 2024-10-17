@@ -1,0 +1,67 @@
+/* Style for the form container */
+.register-container {
+  max-height: 100vh; /* Ensure the form fits the screen */
+  max-width: 500px; /* Adjust max-width for a cleaner layout */
+  margin: 50px auto; /* Center the form horizontally */
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background for contrast */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  overflow: hidden;
+  color: #333; /* Darker text color */
+}
+
+/* Form title */
+.register-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Style for form input fields */
+.register-container form div {
+  margin-bottom: 15px;
+}
+
+/* Label style */
+.register-container form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+/* Input field style */
+.register-container form input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box; /* Ensure padding is inside width */
+}
+
+/* Input focus effect */
+.register-container form input:focus {
+  border-color: #007bff; /* Highlight border on focus */
+  outline: none; /* Remove the default outline */
+}
+
+/* Submit button style */
+.register-container form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #77cdff;
+  color: #091057;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Button hover effect */
+.register-container form button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}

@@ -58,13 +58,13 @@ function ArticleBody() {
       <div className="article-content">
         <h2>{article.title}</h2>
         <p>{article.content}</p>
-        {article.image && (
+        {/* {article.image && (
           <img
             src={article.image}
             alt={article.title}
             className="article-image"
           />
-        )}
+        )} */}
       </div>
     </div>
   );

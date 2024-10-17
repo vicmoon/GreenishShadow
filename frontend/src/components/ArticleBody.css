@@ -2,6 +2,7 @@
 .article-tag {
   max-height: 100vh; /* Adjust this height based on your layout */
   max-width: 900px;
+  margin-left: 300px;
   overflow: hidden; /* Hide overflow */
   position: relative; /* Ensure position relative to child elements */
   background-color: aliceblue;

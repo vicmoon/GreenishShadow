@@ -59,9 +59,16 @@ const loginController = async (req, res, next) => {
     // Find the user by email
     const user = await User.findOne({ email });
 
-    // If no user is found or password is incorrect
-    if (!user || !(await user.comparePassword(password))) {
-      return next(appError('Invalid email or password', 401));
+    // If no user is found
+    if (!user) {
+      return next(appError('Invalid email or password', 401)); // Handle user not found case
+    }
+
+    // If the user exists, compare the password
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return next(appError('Invalid email or password', 401)); // Handle incorrect password case
     }
 
     // Store the user ID in the session after successful login
@@ -70,7 +77,7 @@ const loginController = async (req, res, next) => {
     // Send a success response or redirect the user
     res.status(200).json({ message: 'Login successful', user });
   } catch (error) {
-    return next(appError('An error occurred during login', 500));
+    return next(appError('An error occurred during login', error));
   }
 };
 
