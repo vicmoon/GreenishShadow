@@ -15,18 +15,18 @@ const upload = multer({
 });
 
 // GET all posts
-postsRoutes.get('/posts', allPostsController);
+postsRoutes.get('/', allPostsController); // Route: GET /api/posts
 
-// GET a post
-postsRoutes.get('/posts/:articleId', getOnePostController);
+// GET a single post by ID
+postsRoutes.get('/:articleId', getOnePostController); // Route: GET /api/posts/:articleId
 
-// POST new Post
-postsRoutes.post('/posts', postPostController);
+// POST new post
+postsRoutes.post('/', postPostController); // Route: POST /api/posts
 
-// EDIT Post
-postsRoutes.put('/posts/:id', upload.single('image'), editPostController);
+// EDIT post (with image upload)
+postsRoutes.put('/:id', upload.single('image'), editPostController); // Route: PUT /api/posts/:id
 
-// DELETE Post
-postsRoutes.delete('/:id', deletePostController);
+// DELETE post
+postsRoutes.delete('/:id', deletePostController); // Route: DELETE /api/posts/:id
 
 module.exports = postsRoutes;

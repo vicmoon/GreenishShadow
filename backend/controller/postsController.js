@@ -5,7 +5,7 @@ const appError = require('../utils/appError');
 // GET all posts
 const allPostsController = async (req, res, next) => {
   try {
-    const posts = await Post.find().sort({ createdAt: -1 }); // Latest posts first
+    const posts = await Post.find().sort({ createdAt: -1 }).populate('user'); // Latest posts first
     res.status(200).json(posts); // Return the posts as a JSON response
   } catch (error) {
     next(new appError('Failed to retrieve posts', 500)); // Handle error properly
@@ -34,22 +34,35 @@ const postPostController = async (req, res, next) => {
   const { title, content, tag, image } = req.body;
 
   try {
-    const createdPost = await Post.create({
+    // Assuming the logged-in user's ID is stored in the session (req.session.userAuth)
+    const user = req.session.userAuth;
+
+    if (!user) {
+      return res.status(401).json({
+        status: 'error',
+        message: 'You must be logged in to create a post',
+      });
+    }
+
+    // Create a new post with the logged-in user ID
+    const newPost = await Post.create({
       title,
       content,
       tag,
-      image, // Now stores the Firebase image URL
+      image,
+      user, // Assign the user ID to the post
     });
-    console.log('Post created', createdPost);
 
-    // Send a JSON response with the created post
     res.status(201).json({
-      message: 'Post created successfully',
-      post: createdPost,
+      status: 'success',
+      data: newPost,
     });
   } catch (error) {
-    console.error('Error creating post:', error.message);
-    res.status(400).json({ error: error.message });
+    console.error('Error creating post:', error);
+    res.status(500).json({
+      status: 'error',
+      message: 'Failed to create post',
+    });
   }
 };
 

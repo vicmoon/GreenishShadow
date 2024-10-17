@@ -65,7 +65,9 @@ const loginController = async (req, res, next) => {
     }
 
     // If the user exists, compare the password
+    console.log('Comparing password:', password, user.password);
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log('Password match result:', isMatch);
 
     if (!isMatch) {
       return next(appError('Invalid email or password', 401)); // Handle incorrect password case
@@ -73,19 +75,32 @@ const loginController = async (req, res, next) => {
 
     // Store the user ID in the session after successful login
     req.session.userAuth = user._id; // Save the user ID in the session
+    console.log('Session before login:', req.session);
+    req.session.userAuth = user._id;
+    console.log('Session after login:', req.session);
 
     // Send a success response or redirect the user
     res.status(200).json({ message: 'Login successful', user });
   } catch (error) {
-    return next(appError('An error occurred during login', error));
+    console.error('Login error:', error.message);
+    return next(appError('An error occurred during login', 500));
   }
 };
 
 // Logout
-const logoutUserController = async (req, res) => {
+const logoutUserController = async (req, res, next) => {
   // destroy session
-  req.session.destroy(() => {
-    res.redirect('/posts');
+  req.session.destroy((err) => {
+    if (err) {
+      // If there's an error destroying the session, handle it properly
+      return next(appError('Error occurred during logout', 500));
+    }
+
+    // Clear the session cookie as an extra step
+    res.clearCookie('connect.sid', { path: '/' });
+
+    // Redirect the user after the session is destroyed
+    res.status(200).json({ message: 'Login successful', user });
   });
 };
 

@@ -6,6 +6,7 @@ import ArticleBody from './components/ArticleBody';
 import CreatePost from './components/CreatePost';
 import Register from './components/Register';
 import Login from './components/Login';
+import Logout from './components/Logout';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Logout />} />
       </Routes>
     </Router>
   );
