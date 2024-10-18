@@ -4,13 +4,13 @@ const { getStorage } = require('firebase/storage');
 
 // Your Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyDJ-EslLfmE8aIgHoN6LFNGfjX-jvwg8Vk',
-  authDomain: 'greenishshadow-4e98a.firebaseapp.com',
-  projectId: 'greenishshadow-4e98a',
-  storageBucket: 'greenishshadow-4e98a.appspot.com',
-  messagingSenderId: '1047270130975',
-  appId: '1:1047270130975:web:da0e3970594be4128d1c2a',
-  measurementId: 'G-46KS3MEB1R',
+  apiKey: process.env.apiKey,
+  authDomain: process.env.authDomain,
+  projectId: process.env.projectId,
+  storageBucket: process.env.storageBucket,
+  messagingSenderId: process.env.messagingSenderId,
+  appId: process.env.appId,
+  measurementId: process.env.measurementId,
 };
 
 // Initialize Firebase
