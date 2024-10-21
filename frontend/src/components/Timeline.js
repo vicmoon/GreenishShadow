@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Timeline.css';
+const formatDate = require('../formatDate');
 
 function Timeline() {
   const [articles, setArticles] = useState([]);
@@ -38,7 +39,7 @@ function Timeline() {
               >
                 <img src={article.image || '/game.jpg'} alt={article.title} />
               </Link>
-              <p>{article.createdAt}</p>
+              <p>{formatDate(article.createdAt)}</p>
             </div>
           </div>
         ))
