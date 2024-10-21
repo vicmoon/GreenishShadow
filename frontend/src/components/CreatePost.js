@@ -59,9 +59,19 @@ function CreatePost() {
         tag,
         image: imageURL,
       }),
+      credentials: 'include',
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          // If response status is not OK, throw an error with the response message
+          return response.json().then((data) => {
+            throw new Error(data.message || 'Error creating post');
+          });
+        }
+        return response.json();
+      })
       .then((data) => {
+        // If post creation is successful
         console.log('Post created:', data);
         setTitle('');
         setContent('');
@@ -70,18 +80,19 @@ function CreatePost() {
         setImageURL('');
         setIsSubmitting(false);
 
-        // Display confirmation message
+        // Display success message
         setConfirmationMessage('✅ Post created successfully!');
 
-        // Set a delay before redirecting
+        // Redirect after a short delay
         setTimeout(() => {
           navigate('/');
         }, 3000);
       })
       .catch((error) => {
-        console.error('Error creating post:', error);
+        // Display the exact error message from the backend
+        console.error('Error creating post:', error.message);
         setIsSubmitting(false);
-        setConfirmationMessage('❌ Error creating post. Please try again.');
+        setConfirmationMessage(`❌ ${error.message}`);
       });
   };
 

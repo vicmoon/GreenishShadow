@@ -1,6 +1,5 @@
 const express = require('express');
-const multer = require('multer');
-const storage = require('../config/firebase');
+const loggedIn = require('../middlewares/loggedIn');
 const postsRoutes = express.Router();
 const {
   allPostsController,
@@ -9,10 +8,6 @@ const {
   deletePostController,
   editPostController,
 } = require('../controller/postsController');
-
-const upload = multer({
-  storage,
-});
 
 // GET all posts
 postsRoutes.get('/', allPostsController); // Route: GET /api/posts
@@ -24,7 +19,7 @@ postsRoutes.get('/:articleId', getOnePostController); // Route: GET /api/posts/:
 postsRoutes.post('/', postPostController); // Route: POST /api/posts
 
 // EDIT post (with image upload)
-postsRoutes.put('/:id', upload.single('image'), editPostController); // Route: PUT /api/posts/:id
+postsRoutes.put('/:id', editPostController); // Route: PUT /api/posts/:id
 
 // DELETE post
 postsRoutes.delete('/:id', deletePostController); // Route: DELETE /api/posts/:id

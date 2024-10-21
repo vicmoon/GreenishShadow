@@ -36,7 +36,7 @@ const registerUserController = async (req, res, next) => {
     });
 
     // redirect the user instead of the confirmation
-    res.redirect('/posts');
+    res.redirect('/');
     console.log(newUser);
     // res.json({
     //   status: "Success",
@@ -47,7 +47,6 @@ const registerUserController = async (req, res, next) => {
       status: 'error',
       message: error.message,
     });
-    res.json(error);
   }
 };
 
@@ -75,12 +74,10 @@ const loginController = async (req, res, next) => {
 
     // Store the user ID in the session after successful login
     req.session.userAuth = user._id; // Save the user ID in the session
-    console.log('Session before login:', req.session);
-    req.session.userAuth = user._id;
-    console.log('Session after login:', req.session);
-
-    // Send a success response or redirect the user
-    res.status(200).json({ message: 'Login successful', user });
+    req.session.save((err) => {
+      if (err) console.error('Session save error:', err);
+      res.status(200).json({ message: 'Login successful', user });
+    });
   } catch (error) {
     console.error('Login error:', error.message);
     return next(appError('An error occurred during login', 500));

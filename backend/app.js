@@ -13,14 +13,20 @@ const userRoutes = require('./routes/users');
 
 const app = express();
 
+// to parse the data from req.body
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // Enable CORS for all routes
 
+// Allow requests from your frontend (http://localhost:3000)
 app.use(
   cors({
-    origin: 'http://localhost:3000', // Allow requests from the frontend
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
+    origin: 'http://localhost:3000', // Replace with your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true, // Allow cookies to be sent across different origins
   })
 );
+
 // Body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -35,11 +41,28 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: mongoStore.create({
-      client: mongoose.connection.getClient(), // Using MongoDB to store sessions
+      mongoUrl: process.env.MONGO_URL,
       ttl: 24 * 60 * 60, // 1 day session expiration
     }),
+    cookie: {
+      httpOnly: true,
+      secure: false, // For development
+      maxAge: 24 * 60 * 60 * 1000, // 1 day expiration
+      sameSite: 'lax', // Ensure cookies are sent across domains
+    },
   })
 );
+
+// Save the logged-in user into locals
+app.use((req, res, next) => {
+  if (req.session.userAuth) {
+    res.locals.userAuth = req.session.userAuth;
+  } else {
+    res.locals.userAuth = null;
+  }
+  res.locals.isAdmin = req.session.isAdmin;
+  next();
+});
 
 // Make sure session middleware is applied **before** your routes
 app.use('/api/posts', postsRoutes);

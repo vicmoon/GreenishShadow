@@ -31,28 +31,27 @@ const getOnePostController = async (req, res) => {
 
 //POST a Post
 const postPostController = async (req, res, next) => {
+  console.log('Session data in post creation:', req.session); // Log session details
+
   const { title, content, tag, image } = req.body;
 
   try {
-    // Assuming the logged-in user's ID is stored in the session (req.session.userAuth)
-    const user = req.session.userAuth;
+    // const user = req.session.userAuth;
+    // const userFound = await User.findById(user);
+    // if (!userFound) {
+    //   return res.status(401).json({
+    //     status: 'error',
+    //     message: 'User not found',
+    //   });
+    // }
 
-    if (!user) {
-      return res.status(401).json({
-        status: 'error',
-        message: 'You must be logged in to create a post',
-      });
-    }
-
-    // Create a new post with the logged-in user ID
     const newPost = await Post.create({
       title,
       content,
       tag,
       image,
-      user, // Assign the user ID to the post
+      // user: userFound._id,
     });
-
     res.status(201).json({
       status: 'success',
       data: newPost,
