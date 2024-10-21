@@ -1,4 +1,5 @@
 const User = require('../model/userModel');
+const sendConfirmationEmail = require('../nodemailer');
 
 const registerUserController = async (req, res, next) => {
   const { email, weeklyLetter, gameUpdates } = req.body;
@@ -25,6 +26,9 @@ const registerUserController = async (req, res, next) => {
       weeklyLetter,
       gameUpdates,
     });
+
+    // Send confirmation email
+    sendConfirmationEmail(email, weeklyLetter, gameUpdates);
 
     res.status(201).json({
       status: 'success',
