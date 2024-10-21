@@ -82,6 +82,8 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  letter-spacing: 4px;
+  margin-right: 20px;
 }
 
 .subscription h5 {
@@ -93,11 +95,11 @@ body {
 
 .subscription input[type='email'] {
   padding: 8px;
-  max-width: 120px;
-  margin-top: -10px;
+  max-width: 150px;
+  margin-top: -20px;
   background-color: #333; /* Dark background to match */
   color: #fff;
-  border-radius: 4px;
+  border-radius: 10px;
   margin-bottom: 10px;
 }
 
@@ -111,8 +113,20 @@ body {
 
 .subscription input[type='checkbox'] {
   margin-right: 10px;
+  margin-left: 18px;
 }
 
 .subscription label {
   margin-left: -15px;
+}
+.subscription button {
+  background-color: #333;
+  margin-left: 40px;
+  color: #fff;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.subscription button:hover {
+  background-color: green;
 }
