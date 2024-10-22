@@ -58,7 +58,7 @@ function Header() {
   return (
     <div className="header">
       <section className="socials">
-        <a href={`${process.env.REACT_APP_BACKEND_BASEURL}/api/posts`}>
+        <a href="https://greenish-shadow-5ceb.vercel.app">
           <img className="socials-logo" src="/logo.jpg" alt="logo" />
         </a>
         <span className="socials-text">
