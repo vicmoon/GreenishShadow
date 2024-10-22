@@ -23,11 +23,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //   'https://greenish-shadow-5ceb.vercel.app', // for production
 // ];
 
-app.use(
-  cors({
-    origin: 'https://greenish-shadow-5ceb.vercel.app',
-  })
-);
+app.use(cors());
+
 // app.use(
 //   cors({
 //     origin: function (origin, callback) {
