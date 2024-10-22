@@ -18,15 +18,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Enable CORS for all routes
 
-// Allow requests from your frontend (http://localhost:3000)
+const allowedOrigins = [
+  'http://localhost:3000', // for local development
+  'https://greenish-shadow-5ceb.vercel.app', // for production
+];
+
 app.use(
   cors({
-    origin: 'http://localhost:3000', // Replace with your frontend URL
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true, // Allow cookies to be sent across different origins
+    credentials: true, // Allow cookies
   })
 );
-
 // Body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
