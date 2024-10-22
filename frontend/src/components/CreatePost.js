@@ -3,10 +3,12 @@ import './CreatePost.css';
 import { storage } from '../firebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import ReactQuill from 'react-quill'; // Import React-Quill
+import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 
 function CreatePost() {
   const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState(''); // Content managed by Quill
   const [tag, setTag] = useState('Article');
   const [imageFile, setImageFile] = useState(null);
   const [imageURL, setImageURL] = useState('');
@@ -111,12 +113,16 @@ function CreatePost() {
         onChange={(e) => setTitle(e.target.value)}
         className="input-field"
       />
-      <textarea
-        placeholder="Content"
+
+      <ReactQuill
         value={content}
-        onChange={(e) => setContent(e.target.value)}
-        className="textarea-field"
+        onChange={setContent}
+        placeholder="Write your content here..."
+        modules={CreatePost.modules}
+        formats={CreatePost.formats}
+        className="quill-editor"
       />
+
       <select
         value={tag}
         onChange={(e) => setTag(e.target.value)}
@@ -143,5 +149,39 @@ function CreatePost() {
     </div>
   );
 }
+
+// Configure the Quill modules and formats to enable toolbar options
+CreatePost.modules = {
+  toolbar: [
+    [{ header: '1' }, { header: '2' }, { font: [] }],
+    [{ size: [] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [
+      { list: 'ordered' },
+      { list: 'bullet' },
+      { indent: '-1' },
+      { indent: '+1' },
+    ],
+    ['link', 'image', 'video'],
+    ['clean'],
+  ],
+};
+
+CreatePost.formats = [
+  'header',
+  'font',
+  'size',
+  'bold',
+  'italic',
+  'underline',
+  'strike',
+  'blockquote',
+  'list',
+  'bullet',
+  'indent',
+  'link',
+  'image',
+  'video',
+];
 
 export default CreatePost;

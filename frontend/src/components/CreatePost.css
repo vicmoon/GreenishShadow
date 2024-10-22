@@ -13,6 +13,11 @@
   flex-direction: column;
 }
 
+.quill-editor {
+  height: 100vh;
+  max-width: 1300px;
+  color: #333;
+}
 .create-post h2 {
   text-align: center;
   color: #333;
