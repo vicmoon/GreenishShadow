@@ -73,6 +73,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/test', (req, res) => {
+  res.send('Backend is working');
+});
+
 // Make sure session middleware is applied **before** your routes
 app.use('/api/posts', postsRoutes);
 app.use('/api/users', userRoutes);
