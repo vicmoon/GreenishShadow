@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import './Header.css';
 
 function Header() {
@@ -8,7 +8,7 @@ function Header() {
   const [gameUpdates, setGameUpdates] = useState(false);
   const [confirmationMessage, setConfirmationMessage] = useState('');
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent the form from refreshing the page
