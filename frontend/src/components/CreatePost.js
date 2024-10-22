@@ -48,7 +48,7 @@ function CreatePost() {
 
     setIsSubmitting(true);
 
-    fetch('http://localhost:9000/api/posts', {
+    fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/api/posts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
