@@ -5,8 +5,8 @@ const {
   allPostsController,
   postPostController,
   getOnePostController,
-  deletePostController,
-  editPostController,
+  // deletePostController,
+  // editPostController,
 } = require('../controller/postsController');
 
 // GET all posts
@@ -18,10 +18,10 @@ postsRoutes.get('/:articleId', getOnePostController); // Route: GET /api/posts/:
 // POST new post
 postsRoutes.post('/', postPostController); // Route: POST /api/posts
 
-// EDIT post (with image upload)
-postsRoutes.put('/:id', editPostController); // Route: PUT /api/posts/:id
+// // EDIT post
+// postsRoutes.put('/:id', editPostController); // Route: PUT /api/posts/:id
 
-// DELETE post
-postsRoutes.delete('/:id', deletePostController); // Route: DELETE /api/posts/:id
+// // DELETE post
+// postsRoutes.delete('/:id', deletePostController); // Route: DELETE /api/posts/:id
 
 module.exports = postsRoutes;
