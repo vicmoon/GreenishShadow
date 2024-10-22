@@ -14,7 +14,7 @@ function Header() {
     e.preventDefault(); // Prevent the form from refreshing the page
 
     // Send the form data to the backend
-    fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/api/users/register`, {
+    fetch('http://localhost:9000/api/posts/api/users/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

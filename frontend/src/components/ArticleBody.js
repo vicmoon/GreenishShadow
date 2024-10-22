@@ -11,7 +11,7 @@ function ArticleBody() {
   // Fetch the article from the backend when the component mounts
   useEffect(() => {
     // Replace with the correct backend API URL
-    fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/api/posts/${articleId}`)
+    fetch(`http://localhost:9000/api/posts/${articleId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Error fetching article: ${response.status}`);

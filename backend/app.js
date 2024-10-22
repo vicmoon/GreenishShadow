@@ -18,22 +18,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Enable CORS for all routes
 
-const allowedOrigins = [
-  'http://localhost:3000', // for local development
-  'https://greenish-shadow-5ceb.vercel.app', // for production
-];
-
+// Allow requests from your frontend (http://localhost:3000)
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
+    origin: 'http://localhost:3000', // Replace with your frontend URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true, // Allow cookies
+    credentials: true, // Allow cookies to be sent across different origins
   })
 );
 
@@ -56,9 +46,9 @@ app.use(
     }),
     cookie: {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // Secure cookies in production
+      secure: false, // For development
       maxAge: 24 * 60 * 60 * 1000, // 1 day expiration
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Ensure cookies are sent across domains
+      sameSite: 'lax', // Ensure cookies are sent across domains
     },
   })
 );

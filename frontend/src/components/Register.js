@@ -23,7 +23,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_BASEURL}/api/users/register`,
+        'http://localhost:9000/api/users/register',
         formData
       );
       if (response.status === 200) {
