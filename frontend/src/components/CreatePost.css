@@ -1,49 +1,58 @@
-/* CreatePost.css */
-
+/* General layout adjustments */
 .create-post {
-  max-width: 1300px;
-  height: 100vh;
-  margin: 0 auto;
-  padding: 0 20px;
+  max-width: 1000px; /* Adjust the max width to fit your design */
+  margin: 50px auto; /* Center it with some space from the top */
+  padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
+  height: 100vh; /* Full height of the viewport */
+  box-sizing: border-box;
 }
 
-.quill-editor {
-  height: 100vh;
-  max-width: 1300px;
-  color: #333;
-}
 .create-post h2 {
   text-align: center;
   color: #333;
   margin-bottom: 20px;
 }
 
+/* Quill editor */
+.quill-editor {
+  flex: 1; /* Allow the Quill editor to grow and take up remaining space */
+  min-height: 300px; /* Set a minimum height to ensure it's not too small */
+  max-height: calc(
+    100vh - 150px
+  ); /* Subtract some space for other form elements */
+  color: #333;
+  margin-bottom: 20px;
+}
+
 .input-field,
-.textarea-field,
 .select-field {
   margin-bottom: 15px;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 95%;
+  width: 100%; /* Use full width of the form */
+  box-sizing: border-box; /* Ensure padding doesn’t affect width */
 }
 
-.textarea-field {
-  height: 300px;
-  resize: none;
+.select-field {
+  cursor: pointer;
+}
+
+select {
+  margin-top: 60px;
 }
 
 .image-upload {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 20px;
 }
 
@@ -56,6 +65,7 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  transition: background-color 0.3s ease; /* Smooth hover transition */
 }
 
 .upload-button:hover,
@@ -70,21 +80,21 @@
 }
 
 .upload-button {
-  margin-right: 35px;
+  margin-right: 20px;
 }
 
 .submit-button {
-  margin-top: 15px;
-  width: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  width: 150px; /* Adjust width for balance */
+  margin-top: 20px;
+  align-self: center; /* Center the button in the form */
 }
 
 .confirmation-message {
-  color: #333;
+  color: white;
   background-color: #4caf50;
   margin-bottom: 10px;
   padding: 10px;
-  border-radius: 30px;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 16px;
 }

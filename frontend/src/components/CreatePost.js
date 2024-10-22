@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './CreatePost.css';
 import { storage } from '../firebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill'; // Import React-Quill
 import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 
@@ -14,9 +14,9 @@ function CreatePost() {
   const [imageURL, setImageURL] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [confirmationMessage, setConfirmationMessage] = useState(''); // State for confirmation message
+  const [confirmationMessage, setConfirmationMessage] = useState('');
 
-  const navigate = useNavigate(); // Initialize navigate hook
+  const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     setImageFile(e.target.files[0]);
@@ -65,7 +65,6 @@ function CreatePost() {
     })
       .then((response) => {
         if (!response.ok) {
-          // If response status is not OK, throw an error with the response message
           return response.json().then((data) => {
             throw new Error(data.message || 'Error creating post');
           });
@@ -73,8 +72,6 @@ function CreatePost() {
         return response.json();
       })
       .then((data) => {
-        // If post creation is successful
-        console.log('Post created:', data);
         setTitle('');
         setContent('');
         setTag('Article');
@@ -82,16 +79,13 @@ function CreatePost() {
         setImageURL('');
         setIsSubmitting(false);
 
-        // Display success message
         setConfirmationMessage('✅ Post created successfully!');
 
-        // Redirect after a short delay
         setTimeout(() => {
           navigate('/');
         }, 3000);
       })
       .catch((error) => {
-        // Display the exact error message from the backend
         console.error('Error creating post:', error.message);
         setIsSubmitting(false);
         setConfirmationMessage(`❌ ${error.message}`);
@@ -114,12 +108,13 @@ function CreatePost() {
         className="input-field"
       />
 
+      {/* Quill editor */}
       <ReactQuill
         value={content}
-        onChange={setContent}
-        placeholder="Write your content here..."
+        onChange={setContent} // Set content using ReactQuill
         modules={CreatePost.modules}
         formats={CreatePost.formats}
+        placeholder="Write your content here..."
         className="quill-editor"
       />
 

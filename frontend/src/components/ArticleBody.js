@@ -57,7 +57,8 @@ function ArticleBody() {
 
       <div className="article-content">
         <h2>{article.title}</h2>
-        <p>{article.content}</p>
+        {/* Render the content as HTML */}
+        <div dangerouslySetInnerHTML={{ __html: article.content }} />
         {/* {article.image && (
           <img
             src={article.image}

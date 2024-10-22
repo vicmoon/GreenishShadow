@@ -1,6 +1,6 @@
 .article-content,
 .article-tag {
-  max-height: 100vh; /* Adjust this height based on your layout */
+  max-height: 80vh; /* Adjust this height based on your layout */
   max-width: 1200px;
   margin-left: 100px;
   overflow: hidden; /* Hide overflow */
@@ -8,6 +8,10 @@
   background-color: aliceblue;
   color: black;
   padding: 20px;
+}
+
+.article-content {
+  margin-bottom: 40px;
 }
 
 .article-content:hover {
