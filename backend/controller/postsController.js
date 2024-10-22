@@ -8,7 +8,7 @@ const allPostsController = async (req, res, next) => {
     const posts = await Post.find().sort({ createdAt: -1 }).populate('user'); // Latest posts first
     res.status(200).json(posts); // Return the posts as a JSON response
   } catch (error) {
-    next(new appError('Failed to retrieve posts', 500)); // Handle error properly
+    next(new appError('Failed to retrieve posts', 500));
   }
 };
 
