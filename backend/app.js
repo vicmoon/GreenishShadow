@@ -1,9 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 const session = require('express-session');
 const mongoStore = require('connect-mongo');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 require('./config/mongoose');
@@ -17,33 +15,28 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Enable CORS for all routes
+const allowedOrigins = [
+  'http://localhost:3000', // for local development
+  'https://greenish-shadow-5ceb.vercel.app', // for production
+];
 
-// const allowedOrigins = [
-//   'http://localhost:3000', // for local development
-//   'https://greenish-shadow-5ceb.vercel.app', // for production
-// ];
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true, // Allow cookies
+  })
+);
 
-app.use(cors());
-
-// app.use(
-//   cors({
-//     origin: function (origin, callback) {
-//       if (!origin || allowedOrigins.includes(origin)) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error('Not allowed by CORS'));
-//       }
-//     },
-//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//     credentials: true, // Allow cookies
-//   })
-// );
 // Body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 // Session configuration
 app.use(
@@ -75,22 +68,16 @@ app.use((req, res, next) => {
   next();
 });
 
+// Test route to check backend status
 app.get('/test', (req, res) => {
   res.send('Backend is working');
 });
 
-// Make sure session middleware is applied **before** your routes
+// Routes
 app.use('/api/posts', postsRoutes);
 app.use('/api/users', userRoutes);
 
-// Wildcard route to serve the React app
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
-});
+// Remove frontend static serving (if frontend is deployed separately)
 
-// const PORT = process.env.PORT || 9000;
-// app.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`);
-// });
-
+// Export the app for Vercel
 module.exports = app;
