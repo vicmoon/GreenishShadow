@@ -14,7 +14,7 @@ function Header() {
     e.preventDefault(); // Prevent the form from refreshing the page
 
     // Send the form data to the backend
-    fetch('http://localhost:9000/api/posts/api/users/register', {
+    fetch('http://localhost:9000/api/users/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
