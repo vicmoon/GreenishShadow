@@ -56,9 +56,9 @@ app.use(
     }),
     cookie: {
       httpOnly: true,
-      secure: false, // For development
+      secure: process.env.NODE_ENV === 'production', // Secure cookies in production
       maxAge: 24 * 60 * 60 * 1000, // 1 day expiration
-      sameSite: 'lax', // Ensure cookies are sent across domains
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Ensure cookies are sent across domains
     },
   })
 );
