@@ -73,8 +73,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/test', (req, res) => {
-  res.send('Backend is working');
+app.get('/', (req, res) => {
+  res.send('Welcome to the Greenish Shadow Backend API');
 });
 
 // Make sure session middleware is applied **before** your routes
