@@ -58,7 +58,9 @@ function Header() {
   return (
     <div className="header">
       <section className="socials">
-        <img className="socials-logo" src="/logo.jpg" alt="logo" />
+        <a href={`${process.env.REACT_APP_BACKEND_BASEURL}/api/posts`}>
+          <img className="socials-logo" src="/logo.jpg" alt="logo" />
+        </a>
         <span className="socials-text">
           <p className="socials-large-text">
             Shadow <br /> Greenish
