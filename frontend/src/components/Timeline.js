@@ -7,7 +7,7 @@ function Timeline() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:9000/api/posts')
+    fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/api/posts`)
       .then((response) => response.json())
       .then((data) => {
         console.log('Data fetched: ', data);

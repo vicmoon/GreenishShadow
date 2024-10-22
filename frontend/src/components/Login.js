@@ -22,7 +22,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'http://localhost:9000/api/users/login',
+        `${process.env.REACT_APP_BACKEND_BASEURL}/api/users/login`,
         formData
       );
       if (response.status === 200) {
