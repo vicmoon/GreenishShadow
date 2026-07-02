@@ -62,35 +62,30 @@ function Header() {
           <img className="socials-logo" src="/logo.jpg" alt="logo" />
         </a> */}
         <span className="socials-text">
-          <p className="socials-large-text">
-            Romain <br /> Vernier
-          </p>
-          <h5>Find me on Social Media</h5>
+          <div className="socials-large-text">
+            <span>Romain</span>
+            <span>Vernier</span>
+          </div>
+
           <ul className="social-links">
-            <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
-              <i className="fab fa-facebook"></i>
-            </a>
-            <a
-              href="https://www.instagram.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.youtube.com" target="_blank" rel="noreferrer">
-              <i className="fab fa-youtube"></i>
-            </a>
-            <a href="https://www.twitter.com" target="_blank" rel="noreferrer">
-              <i className="fab fa-x-twitter"></i>
-            </a>
-            <a href="https://www.telegram.org" target="_blank" rel="noreferrer">
-              <i className="fab fa-telegram"></i>
-            </a>
+            <li className="menu_option">
+              <div className="cube"></div>
+              <ul>Journal</ul>
+            </li>
+
+            <li className="menu_option">
+              <div className="cube"></div>
+              <ul>Motion Design</ul>
+            </li>
+            <li className="menu_option">
+              <div className="cube"></div>
+              <ul>Motion Design</ul>
+            </li>
           </ul>
         </span>
       </section>
 
-      <section className="subscription">
+      {/* <section className="subscription">
         <h5>Subscription</h5>
         {confirmationMessage && <p>{confirmationMessage}</p>}
         <form onSubmit={handleSubmit}>
@@ -119,7 +114,7 @@ function Header() {
           </label>
           <button type="submit">Subscribe</button>
         </form>
-      </section>
+      </section> */}
     </div>
   );
 }
