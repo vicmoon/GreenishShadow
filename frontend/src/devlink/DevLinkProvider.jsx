@@ -1,0 +1,22 @@
+"use client";
+import React from "react";
+import { InteractionsProvider } from "./webflow_modules/interactions";
+import { createIX2Engine } from "./webflow_modules/devlink";
+import { useInjectFonts } from "./webflow_modules/useInjectFonts";
+import { IX3Provider } from "./webflow_modules/ix3-interactions";
+import fontsManifest from "./webflow_modules/fonts.manifest.json";
+
+export const DevLinkContext = React.createContext({});
+
+export const DevLinkProvider = ({ children, ...context }) => {
+  useInjectFonts(fontsManifest);
+  return (
+    <DevLinkContext.Provider value={context}>
+      <IX3Provider>
+        <InteractionsProvider createEngine={createIX2Engine}>
+          {children}
+        </InteractionsProvider>
+      </IX3Provider>
+    </DevLinkContext.Provider>
+  );
+};

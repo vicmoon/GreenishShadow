@@ -70,7 +70,10 @@ body {
 }
 
 .socials-large-text {
-  font-size: 30px;
+  display: flex;
+  flex-direction: row;
+  row-gap: 10px;
+  font-size: 40px;
   letter-spacing: 5px;
   color: #86b2c1;
   text-transform: uppercase;

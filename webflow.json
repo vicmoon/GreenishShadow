@@ -1,0 +1,17 @@
+{
+  "telemetry": {
+    "global": {
+      "allowTelemetry": true,
+      "lastPrompted": 1782974638349,
+      "version": "2.1.1"
+    }
+  },
+  "devlink-export": {
+    "rootDir": "frontend/src/devlink",
+    "components": ".*",
+    "componentGroups": ".*",
+    "ts": true,
+    "cssScopes": true,
+    "relativeHrefRoot": "/"
+  }
+}

@@ -58,12 +58,12 @@ function Header() {
   return (
     <div className="header">
       <section className="socials">
-        <a href="https://greenish-shadow-5ceb.vercel.app">
+        {/* <a href="https://greenish-shadow-5ceb.vercel.app">
           <img className="socials-logo" src="/logo.jpg" alt="logo" />
-        </a>
+        </a> */}
         <span className="socials-text">
           <p className="socials-large-text">
-            Shadow <br /> Greenish
+            Romain <br /> Vernier
           </p>
           <h5>Find me on Social Media</h5>
           <ul className="social-links">
