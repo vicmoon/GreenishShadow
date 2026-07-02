@@ -61,8 +61,8 @@ function Header() {
         {/* <a href="https://greenish-shadow-5ceb.vercel.app">
           <img className="socials-logo" src="/logo.jpg" alt="logo" />
         </a> */}
-        <span className="socials-text">
-          <div className="socials-large-text">
+        <span className="hero-text">
+          <div className="hero-large-text">
             <span>Romain</span>
             <span>Vernier</span>
           </div>

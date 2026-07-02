@@ -36,7 +36,7 @@ body {
   color: #007bff; /* Hover effect */
 }
 
-.socials-text {
+.hero-text {
   margin-left: 10px;
 }
 
@@ -71,7 +71,7 @@ body {
   height: 20px;
   width: 20px;
 }
-.socials-large-text {
+.hero-large-text {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -82,7 +82,7 @@ body {
   font-weight: bold;
 }
 
-.socials-large-text span {
+.hero-large-text span {
   margin-right: 10px;
   margin-bottom: 20px;
   color: #86b2c1;
