@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import './CreatePost.css';
-import { storage } from '../firebaseConfig';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
-import ReactQuill from 'react-quill'; // Import React-Quill
-import 'react-quill/dist/quill.snow.css'; // Import Quill styles
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 function CreatePost() {
   const [title, setTitle] = useState('');
-  const [content, setContent] = useState(''); // Content managed by Quill
+  const [content, setContent] = useState('');
   const [tag, setTag] = useState('Article');
   const [imageFile, setImageFile] = useState(null);
   const [imageURL, setImageURL] = useState('');
@@ -20,29 +18,39 @@ function CreatePost() {
 
   const handleFileChange = (e) => {
     setImageFile(e.target.files[0]);
+    setImageURL('');
   };
 
-  const handleUpload = () => {
-    if (imageFile) {
-      setIsUploading(true);
-      const storageRef = ref(storage, `images/${imageFile.name}`);
-      uploadBytes(storageRef, imageFile)
-        .then((snapshot) => getDownloadURL(snapshot.ref))
-        .then((url) => {
-          setImageURL(url);
-          setIsUploading(false);
-        })
-        .catch((error) => {
-          console.error('Error uploading image:', error);
-          setIsUploading(false);
-          alert('Error uploading image. Please try again.');
-        });
-    } else {
+  const handleUpload = async () => {
+    if (!imageFile) {
       alert('Please select an image file first');
+      return;
+    }
+
+    setIsUploading(true);
+    const formData = new FormData();
+    formData.append('image', imageFile);
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/api/upload`, {
+        method: 'POST',
+        body: formData,
+        credentials: 'include',
+      });
+
+      if (!response.ok) throw new Error('Upload failed');
+
+      const data = await response.json();
+      setImageURL(data.url);
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      alert('Error uploading image. Please try again.');
+    } finally {
+      setIsUploading(false);
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!title || !content || !imageURL) {
       alert('Please fill all fields and upload an image');
       return;
@@ -50,46 +58,33 @@ function CreatePost() {
 
     setIsSubmitting(true);
 
-    fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/api/posts`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        title,
-        content,
-        tag,
-        image: imageURL,
-      }),
-      credentials: 'include',
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return response.json().then((data) => {
-            throw new Error(data.message || 'Error creating post');
-          });
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setTitle('');
-        setContent('');
-        setTag('Article');
-        setImageFile(null);
-        setImageURL('');
-        setIsSubmitting(false);
-
-        setConfirmationMessage('✅ Post created successfully!');
-
-        setTimeout(() => {
-          navigate('/');
-        }, 3000);
-      })
-      .catch((error) => {
-        console.error('Error creating post:', error.message);
-        setIsSubmitting(false);
-        setConfirmationMessage(`❌ ${error.message}`);
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASEURL}/api/posts`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, content, tag, image: imageURL }),
+        credentials: 'include',
       });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || 'Error creating post');
+      }
+
+      setTitle('');
+      setContent('');
+      setTag('Article');
+      setImageFile(null);
+      setImageURL('');
+      setConfirmationMessage('✅ Post created successfully!');
+
+      setTimeout(() => navigate('/'), 3000);
+    } catch (error) {
+      console.error('Error creating post:', error.message);
+      setConfirmationMessage(`❌ ${error.message}`);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -108,10 +103,9 @@ function CreatePost() {
         className="input-field"
       />
 
-      {/* Quill editor */}
       <ReactQuill
         value={content}
-        onChange={setContent} // Set content using ReactQuill
+        onChange={setContent}
         modules={CreatePost.modules}
         formats={CreatePost.formats}
         placeholder="Write your content here..."
@@ -128,10 +122,11 @@ function CreatePost() {
       </select>
 
       <div className="image-upload">
-        <input type="file" onChange={handleFileChange} />
-        <button onClick={handleUpload} className="upload-button">
+        <input type="file" accept="image/*" onChange={handleFileChange} />
+        <button onClick={handleUpload} className="upload-button" disabled={isUploading}>
           {isUploading ? 'Uploading...' : 'Upload Image'}
         </button>
+        {imageURL && <span className="upload-success">✅ Image uploaded</span>}
       </div>
 
       <button
@@ -145,38 +140,22 @@ function CreatePost() {
   );
 }
 
-// Configure the Quill modules and formats to enable toolbar options
 CreatePost.modules = {
   toolbar: [
     [{ header: '1' }, { header: '2' }, { font: [] }],
     [{ size: [] }],
     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    [
-      { list: 'ordered' },
-      { list: 'bullet' },
-      { indent: '-1' },
-      { indent: '+1' },
-    ],
+    [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
     ['link', 'image', 'video'],
     ['clean'],
   ],
 };
 
 CreatePost.formats = [
-  'header',
-  'font',
-  'size',
-  'bold',
-  'italic',
-  'underline',
-  'strike',
-  'blockquote',
-  'list',
-  'bullet',
-  'indent',
-  'link',
-  'image',
-  'video',
+  'header', 'font', 'size',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 'indent',
+  'link', 'image', 'video',
 ];
 
 export default CreatePost;

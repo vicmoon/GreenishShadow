@@ -10,6 +10,7 @@ require('./config/mongoose');
 
 const postsRoutes = require('./routes/posts');
 const userRoutes = require('./routes/users');
+const uploadRoute = require('./routes/upload');
 
 const app = express();
 
@@ -80,6 +81,7 @@ app.get('/', (req, res) => {
 // Make sure session middleware is applied **before** your routes
 app.use('/api/posts', postsRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/upload', uploadRoute);
 
 // Wildcard route to serve the React app
 app.get('*', (req, res) => {
